@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class IndexView(TemplateView):
-    template_name = 'index.html'
+    template_name = 'secure_app/index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -16,18 +16,18 @@ class IndexView(TemplateView):
 class RegisterView(View):
     def get(self, request):
         context = {'title': 'Secure Checklist | Register'}
-        return render(request, 'register.html', context)
+        return render(request, 'secure_app/register.html', context)
 
 
 class LoginView(View):
     def get(self, request):
         context = {'title': 'Secure Checklist | Login'}
-        return render(request, 'login.html', context)
+        return render(request, 'secure_app/login.html', context)
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     login_url = 'login'
-    template_name = 'dashboard.html'
+    template_name = 'secure_app/dashboard.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
