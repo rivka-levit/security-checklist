@@ -3,35 +3,22 @@
 
 {% block content %}
 
-  <br>
+  <div class="container text-center mt-5">
 
-  <br>
+    <i class="fa-solid fa-lock fa-2xl text-dark"></i>
 
-  <div class="text-center">
+    <h3 class="mt-5">SecureX .... The most secure website out there! </h3>
 
+    <p class="mt-4"> Ensure that your Django web application is secure in all areas. </p>
 
-     <!-- Add font awesome icon -->
+    <a class="btn btn-info mt-4"
+       type="button"
+       href="{% url 'register' %}">
 
+      <i class="fa fa-user" aria-hidden="true"></i> &nbsp; Make an account
 
-  <br>
-  <br>
-
-  <h3>SecureX .... The most secure website out there! </h3>
-
-      <br>
-
-      <p> Ensure that your Django web application is secure in all areas. </p>
-
-      <br>
-
-
-      <a class="btn btn-info" type="button"  href="{% url 'register' %}"> <i class="fa fa-user" aria-hidden="true"></i> &nbsp; Make an account </a>
-
+    </a>
 
   </div>
-
-
-
-
   
 {% endblock %}
