@@ -28,6 +28,14 @@ def test_register_page_get_success(client):
     assert b'<title>SecureX | Register</title>' in r.content
 
 
+def test_register_has_protected_form(client):
+    r = client.get(reverse('register'))
+
+    assert r.status_code == 200
+    assert 'register_form' in r.context
+    assert 'csrf_token' in r.context
+
+
 def test_login_page_get_success(client):
     """Test login page get success."""
 
