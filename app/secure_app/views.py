@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 
+from django.http import HttpResponseRedirect
+
 from django.views.generic import TemplateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 
 from secure_app.forms import CreateUserForm
 
@@ -29,9 +32,12 @@ class RegisterView(View):
 
         if form.is_valid():
             form.save()
+
+            messages.success(request, 'Account was created successfully!')
             return redirect('login')
 
-        return redirect(request.META.get('HTTP_REFERER'))
+        messages.error(request, 'Invalid data provided.')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 class LoginView(View):

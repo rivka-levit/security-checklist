@@ -7,6 +7,9 @@ import pytest
 
 from django.shortcuts import reverse
 
+from django.contrib.messages import get_messages
+from django.contrib.auth import get_user_model
+
 pytestmark = pytest.mark.django_db
 
 
@@ -34,6 +37,49 @@ def test_register_has_protected_form(client):
     assert r.status_code == 200
     assert 'register_form' in r.context
     assert 'csrf_token' in r.context
+
+
+def test_register_create_user_success(client):
+    """Test post request to register page creates user successfully."""
+
+    data = {
+        'username': 'test_user',
+        'email': 'test_email@example.com',
+        'password1': 'test_pass_123',
+        'password2': 'test_pass_123'
+    }
+
+    r = client.post(reverse('register'), data=data)
+    messages_received = list(get_messages(r.wsgi_request))
+    user = get_user_model().objects.filter(username=data['username'])
+
+    assert r.status_code == 302
+    assert r['Location'] == reverse('login')
+    assert len(messages_received) == 1
+    assert messages_received[0].message == 'Account was created successfully!'
+    assert user.exists()
+    assert len(user) == 1
+    assert user[0].email == data['email']  # noqa
+
+
+def test_register_invalid_data_fails(client):
+    """Test post request to register page with invalid data fails."""
+
+    data = {
+        'username': 'test_user',
+        'email': 'asdf',
+        'password1': 'test_pass_123',
+        'password2': 'test_pass_123'
+    }
+
+    r = client.post(reverse('register'), data=data)
+    messages_received = list(get_messages(r.wsgi_request))
+    user = get_user_model().objects.filter(username=data['username'])
+
+    assert r.status_code == 302
+    assert len(messages_received) == 1
+    assert messages_received[0].message == 'Invalid data provided.'
+    assert not user.exists()
 
 
 def test_login_page_get_success(client):
