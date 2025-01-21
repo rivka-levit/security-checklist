@@ -33,10 +33,14 @@ def test_register_page_get_success(client):
 
 def test_register_has_protected_form(client):
     r = client.get(reverse('register'))
+    page_content = r.content.decode('utf-8')
 
     assert r.status_code == 200
     assert 'register_form' in r.context
     assert 'csrf_token' in r.context
+    assert 'for="id_username"' in page_content
+    assert 'type="email"' in page_content
+    assert 'type="password"' in page_content
 
 
 def test_register_create_user_success(client):

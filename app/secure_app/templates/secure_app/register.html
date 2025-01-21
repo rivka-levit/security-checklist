@@ -3,6 +3,23 @@
 
 {% block content %}
 
-  <h1>Register</h1>
-  
+  <div class="container">
+    <div class="bg-white shadow form-layout p-5">
+
+      <h3 class="text-center text-primary">Create your account</h3>
+      <h5 class="text-center">Secure your account</h5>
+
+      <form action="{% url 'register' %}" method="post" class="mt-5">
+        {% csrf_token %}
+
+        {{ register_form.as_p }}
+
+        <input type="submit"
+               value="Create account"
+               class="btn btn-info w-100 p-3 mt-4 mt-xl-5">
+      </form>
+
+    </div>
+  </div>
+
 {% endblock %}

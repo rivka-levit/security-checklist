@@ -3,13 +3,16 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 
 from django.views.generic import TemplateView, View
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from secure_app.forms import CreateUserForm
 
 
 class IndexView(TemplateView):
+    """Home page view."""
+
     template_name = 'secure_app/index.html'
 
     def get_context_data(self, **kwargs):
@@ -19,7 +22,9 @@ class IndexView(TemplateView):
 
 
 class RegisterView(View):
-    def get(self, request):
+    """User registration page view."""
+
+    def get(self, request):  # noqa
         form = CreateUserForm()
         context = {
             'title': 'SecureX | Register',
@@ -27,7 +32,7 @@ class RegisterView(View):
         }
         return render(request, 'secure_app/register.html', context)
 
-    def post(self, request):
+    def post(self, request):  # noqa
         form = CreateUserForm(request.POST)
 
         if form.is_valid():
@@ -41,12 +46,16 @@ class RegisterView(View):
 
 
 class LoginView(View):
-    def get(self, request):
+    """User login page view."""
+
+    def get(self, request):  # noqa
         context = {'title': 'SecureX | Login'}
         return render(request, 'secure_app/login.html', context)
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):
+    """User dashboard page view."""
+
     login_url = 'login'
     template_name = 'secure_app/dashboard.html'
 
