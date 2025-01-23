@@ -5,6 +5,8 @@ Command: pytest secure_app/tests --cov=secure_app --cov-report term-missing:skip
 
 import pytest
 
+from unittest.mock import patch
+
 from django.shortcuts import reverse
 
 from django.contrib.messages import get_messages
@@ -32,6 +34,8 @@ def test_register_page_get_success(client):
 
 
 def test_register_has_protected_form(client):
+    """Test register has correct registration form."""
+
     r = client.get(reverse('register'))
     page_content = r.content.decode('utf-8')
 
@@ -41,9 +45,11 @@ def test_register_has_protected_form(client):
     assert 'for="id_username"' in page_content
     assert 'type="email"' in page_content
     assert 'type="password"' in page_content
+    assert 'for="id_captcha"' in page_content
 
 
-def test_register_create_user_success(client):
+@patch("django_recaptcha.fields.ReCaptchaField.validate")
+def test_register_create_user_success(patched_method, client):
     """Test post request to register page creates user successfully."""
 
     data = {
@@ -52,8 +58,10 @@ def test_register_create_user_success(client):
         'password1': 'test_pass_123',
         'password2': 'test_pass_123'
     }
+    patched_method.return_value = True
 
     r = client.post(reverse('register'), data=data)
+
     messages_received = list(get_messages(r.wsgi_request))
     user = get_user_model().objects.filter(username=data['username'])
 
