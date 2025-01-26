@@ -8,3 +8,5 @@ psycopg2>=2.9.10,<3.0
 django-crispy-forms>=2.3,<2.4
 crispy-bootstrap5==2024.10
 django-recaptcha>=4.0.0,<4.1
+django-two-factor-auth==1.16.0
+django-two-factor-auth[phonenumbers]==1.16.0

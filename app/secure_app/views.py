@@ -39,18 +39,18 @@ class RegisterView(View):
             form.save()
 
             messages.success(request, 'Account was created successfully!')
-            return redirect('login')
+            return redirect('two_factor:login')
 
         messages.error(request, 'Invalid data provided.')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-class LoginView(View):
-    """User login page view."""
-
-    def get(self, request):  # noqa
-        context = {'title': 'SecureX | Login'}
-        return render(request, 'secure_app/login.html', context)
+# class LoginView(View):
+#     """User login page view."""
+#
+#     def get(self, request):  # noqa
+#         context = {'title': 'SecureX | Login'}
+#         return render(request, 'secure_app/login.html', context)
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):
