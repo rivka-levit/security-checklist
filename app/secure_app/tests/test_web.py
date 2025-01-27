@@ -94,15 +94,6 @@ def test_register_invalid_data_fails(client):
     assert not user.exists()
 
 
-# def test_login_page_get_success(client):
-#     """Test login page get success."""
-#
-#     r = client.get(reverse('login'))
-#
-#     assert r.status_code == 200
-#     assert b'<title>SecureX | Login</title>' in r.content
-
-
 def test_dashboard_page_get_success(client, sample_user):
     """Test dashboard page get success."""
 

@@ -45,14 +45,6 @@ class RegisterView(View):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-# class LoginView(View):
-#     """User login page view."""
-#
-#     def get(self, request):  # noqa
-#         context = {'title': 'SecureX | Login'}
-#         return render(request, 'secure_app/login.html', context)
-
-
 class DashboardView(LoginRequiredMixin, TemplateView):
     """User dashboard page view."""
 
