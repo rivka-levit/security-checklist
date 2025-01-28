@@ -52,9 +52,11 @@
 
 
         <li class="nav-item">
-
-          <a class="btn btn-alert navbar-btn" type="button" href="{% url 'two_factor:login' %}">Login</a>
-
+          {% if user.is_authenticated %}
+            <a class="btn btn-alert navbar-btn" type="button" href="{% url 'logout' %}">Logout</a>
+          {% else %}
+            <a class="btn btn-alert navbar-btn" type="button" href="{% url 'two_factor:login' %}">Login</a>
+          {% endif %}
         </li>
 
 

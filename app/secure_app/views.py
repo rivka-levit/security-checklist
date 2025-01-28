@@ -6,6 +6,7 @@ from django.views.generic import TemplateView, View
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import auth
 
 from secure_app.forms import CreateUserForm
 
@@ -48,10 +49,17 @@ class RegisterView(View):
 class DashboardView(LoginRequiredMixin, TemplateView):
     """User dashboard page view."""
 
-    login_url = 'login'
+    login_url = 'two_factor:login'
     template_name = 'secure_app/dashboard.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'SecureX | Dashboard'
         return context
+
+
+def user_logout(request):
+    """User logout."""
+
+    auth.logout(request)
+    return redirect('index')

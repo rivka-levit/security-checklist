@@ -102,3 +102,18 @@ def test_dashboard_page_get_success(client, sample_user):
 
     assert r.status_code == 200
     assert b'<title>SecureX | Dashboard</title>' in r.content
+
+
+def test_logout_success(client, sample_user):
+    """Test logout successfully."""
+
+    client.force_login(sample_user)
+    r = client.get(reverse('logout'))
+
+    assert r.status_code == 302
+    assert r.url == reverse('index')
+
+    r = client.get(reverse('index'))
+
+    assert r.status_code == 200
+    assert r.context['user'].is_anonymous
