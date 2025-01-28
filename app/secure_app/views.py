@@ -16,6 +16,11 @@ class IndexView(TemplateView):
 
     template_name = 'secure_app/index.html'
 
+    def dispatch(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('dashboard')
+        return super().dispatch(*args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'SecureX'
