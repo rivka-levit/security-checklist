@@ -2,7 +2,26 @@
 {% load static %}
 
 {% block content %}
+  <div class="container">
+    <div class="shadow form-layout bg-light p-5">
+      <h2 class="text-center">Welcome, {{ user }}!</h2>
+      <p class="text-center">This is the Dashboard</p>
+    </div>
 
-  <h1>Dashboard</h1>
+    <div class="shadow form-layout bg-light p-5">
+      <h2 class="text-center">About SecureX</h2>
+      <p class="text-center">SecureX is the most secure site in the world!</p>
+    </div>
+
+    <div class="shadow form-layout bg-light p-5">
+      <h2 class="text-center">2FA</h2>
+      <p class="text-center">Two-factor authentication provides users with extra security</p>
+
+      <div class="text-center mt-5">
+        <a class="btn btn-outline-success" type="button" href="{% url 'dashboard' %}">Enable 2FA</a>
+        <a class="btn btn-outline-info" type="button" href="{% url 'dashboard' %}">2FA account settings</a>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
