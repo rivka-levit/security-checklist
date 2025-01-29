@@ -30,7 +30,7 @@ def test_register_page_get_success(client):
     r = client.get(reverse('register'))
 
     assert r.status_code == 200
-    assert b'<title>SecureX | Register</title>' in r.content
+    assert b'<title>SecureX - Register</title>' in r.content
 
 
 def test_register_has_protected_form(client):
@@ -101,7 +101,7 @@ def test_dashboard_page_get_success(client, sample_user):
     r = client.get(reverse('dashboard'))
 
     assert r.status_code == 200
-    assert b'<title>SecureX | Dashboard</title>' in r.content
+    assert b'<title>SecureX - Dashboard</title>' in r.content
 
 
 def test_logout_success(client, sample_user):

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from django.http import HttpResponseRedirect
 
-from django.views.generic import TemplateView, View
+from django.views.generic import TemplateView, View, RedirectView
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -21,11 +21,6 @@ class IndexView(TemplateView):
             return redirect('dashboard')
         return super().dispatch(*args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'SecureX'
-        return context
-
 
 class RegisterView(View):
     """User registration page view."""
@@ -33,7 +28,6 @@ class RegisterView(View):
     def get(self, request):  # noqa
         form = CreateUserForm()
         context = {
-            'title': 'SecureX | Register',
             'register_form': form,
         }
         return render(request, 'secure_app/register.html', context)
@@ -56,11 +50,6 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
     login_url = 'two_factor:login'
     template_name = 'secure_app/dashboard.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'SecureX | Dashboard'
-        return context
 
 
 def user_logout(request):
