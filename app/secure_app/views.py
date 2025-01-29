@@ -52,8 +52,12 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'secure_app/dashboard.html'
 
 
-def user_logout(request):
-    """User logout."""
+class LogoutView(LoginRequiredMixin, RedirectView):
+    """User logout view."""
 
-    auth.logout(request)
-    return redirect('index')
+    login_url = 'two_factor:login'
+    pattern_name = 'index'
+
+    def get_redirect_url(self, *args, **kwargs):
+        auth.logout(self.request)
+        return super().get_redirect_url(*args, **kwargs)
