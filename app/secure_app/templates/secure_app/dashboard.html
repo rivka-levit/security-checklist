@@ -20,8 +20,16 @@
       <p class="text-center">Two-factor authentication provides users with extra security</p>
 
       <div class="text-center mt-5">
-        <a class="btn btn-outline-success" type="button" href="{% url 'two_factor:setup' %}">Enable 2FA</a>
-        <a class="btn btn-outline-info" type="button" href="{% url 'two_factor:profile' %}">2FA account settings</a>
+        <a class="btn btn-outline-success"
+           type="button"
+           href="{% url 'two_factor:setup' %}">
+          Enable 2FA
+        </a>
+        <a class="btn btn-outline-info"
+           type="button"
+           href="{% url 'two_factor:profile' %}">
+          2FA account settings
+        </a>
       </div>
     </div>
   </div>

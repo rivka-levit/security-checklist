@@ -21,8 +21,11 @@
   {% endif %}
 
   <form method="post">{% csrf_token %}{{ form }}
-    <a href="{% url 'two_factor:profile'%}"
-       class="float-right btn btn-link">{% trans "Back to Account Security" %}</a>
-    <button class="btn btn-primary" type="submit">{% trans "Generate Tokens" %}</button>
+    <a href="{% url 'two_factor:profile'%}" class="float-right btn btn-link">
+      {% trans "Back to Account Security" %}
+    </a>
+    <button class="btn btn-primary mt-3" type="submit">
+      {% trans "Generate Tokens" %}
+    </button>
   </form>
 {% endblock %}
