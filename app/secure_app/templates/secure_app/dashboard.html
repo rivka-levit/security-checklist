@@ -20,11 +20,13 @@
       <p class="text-center">Two-factor authentication provides users with extra security</p>
 
       <div class="text-center mt-5">
-        <a class="btn btn-outline-success"
-           type="button"
-           href="{% url 'two_factor:setup' %}">
-          Enable 2FA
-        </a>
+        {% if not user.is_verified %}
+          <a class="btn btn-outline-success"
+             type="button"
+             href="{% url 'two_factor:setup' %}">
+            Enable 2FA
+          </a>
+        {% endif %}
         <a class="btn btn-outline-info"
            type="button"
            href="{% url 'two_factor:profile' %}">
