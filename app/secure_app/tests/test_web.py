@@ -24,6 +24,16 @@ def test_index_page_get_success(client):
     assert b'<title>SecureX</title>' in r.content
 
 
+def test_index_page_redirect_to_dashboard(client, sample_user):
+    """Test index page redirect an authenticated user to the dashboard."""
+
+    client.force_login(sample_user)
+    r = client.get(reverse('index'))
+
+    assert r.status_code == 302
+    assert r.url == reverse('dashboard')
+
+
 def test_register_page_get_success(client):
     """Test register page get success."""
 
