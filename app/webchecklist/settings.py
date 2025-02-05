@@ -17,6 +17,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from datetime import timedelta
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -79,9 +81,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django_otp.middleware.OTPMiddleware',
+    'django_otp.middleware.OTPMiddleware',  # 2FA
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_auto_logout.middleware.auto_logout',
 ]
 
 ROOT_URLCONF = 'webchecklist.urls'
@@ -97,7 +100,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'core.context_processors.title_context'
+                'django_auto_logout.context_processors.auto_logout_client',  # Auto logout
+                'core.context_processors.title_context',
             ],
         },
     },
@@ -169,6 +173,12 @@ MESSAGE_TAGS = {
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 
-
 LOGIN_URL = 'two_factor:login'
 LOGIN_REDIRECT_URL = 'dashboard'
+
+AUTO_LOGOUT = {
+    'IDLE_TIME': timedelta(minutes=10),
+    'SESSION_TIME': timedelta(minutes=30),
+    'MESSAGE': 'The session has expired. Please login again to continue.',
+    'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
+}
