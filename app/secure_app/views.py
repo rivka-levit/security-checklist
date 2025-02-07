@@ -61,3 +61,9 @@ class LogoutView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         auth.logout(self.request)
         return super().get_redirect_url(*args, **kwargs)
+
+
+class AccountLockedView(TemplateView):
+    """User account locked page view."""
+
+    template_name = 'secure_app/account_locked.html'
