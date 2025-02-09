@@ -193,3 +193,10 @@ AUTO_LOGOUT = {
     'MESSAGE': 'The session has expired. Please login again to continue.',
     'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
 }
+
+# Axes configuration
+
+AXES_FAILURE_LIMIT = 3  # How many times a user can fail a login
+AXES_COOLOFF_TIME = 2  # Wait 2 hours before attempting to log in again
+AXES_RESET_ON_SUCCESS = True  # Reset failed login attempts
+AXES_LOCKOUT_TEMPLATE = 'secure_app/account_locked.html'  # Add a custom template
