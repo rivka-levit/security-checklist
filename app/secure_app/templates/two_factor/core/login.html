@@ -38,8 +38,11 @@
       {% endfor %}</p>
     {% endif %}
 
-    {% include "two_factor/_wizard_actions.html" %}
+      {% include "two_factor/_wizard_actions.html" %}
     {% endblock %}
+  <div class="mt-4 float-end">
+    <a href="{% url 'reset_password' %}">Forgot your password?</a>
+  </div>
   </form>
 
   {% block 'backup_tokens' %}
