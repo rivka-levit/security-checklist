@@ -1,5 +1,9 @@
-body {
+body, html {
     background-color: #f0f0f0;
+}
+
+.all-but-footer {
+    min-height: calc(100vh - 210px);
 }
 
 .form-layout {
@@ -17,4 +21,15 @@ input[type=email] {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+}
+
+footer {
+    margin-top: 100px;
+}
+
+footer p {
+    display: block;
+    font-size: 15px;
+    margin-top: 20px;
+    text-transform: initial;
 }

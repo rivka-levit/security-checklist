@@ -22,54 +22,55 @@
 
 <!-- ------------------------ Navigation ------------------------- -->
 
+<div class="all-but-footer">
   <nav class="navbar navbar-expand-lg navbar-light bg-white ">
     <div class="container">
 
-    <a class="navbar-brand main-heading" href="{% url 'index' %}">
+      <a class="navbar-brand main-heading" href="{% url 'index' %}">
 
-      SecureX
+        SecureX
 
-    </a>
+      </a>
 
-    <button class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <button class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
 
-      <ul class="navbar-nav ms-auto">
-
-        <li class="nav-item">
-          {% if not user.is_authenticated %}
-            <a class="btn btn-alert navbar-btn" type="button" href="{% url 'register' %}">Register</a>
-          {% else %}
-            <a class="btn btn-alert navbar-btn" type="button" href="{% url 'dashboard' %}">Dashboard</a>
-          {% endif %}
-
-        </li>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
 
-        <li class="nav-item">
-          {% if user.is_authenticated %}
-            <a class="btn btn-alert navbar-btn" type="button" href="{% url 'logout' %}">Logout</a>
-          {% else %}
-            <a class="btn btn-alert navbar-btn" type="button" href="{% url 'two_factor:login' %}">Login</a>
-          {% endif %}
-        </li>
+        <ul class="navbar-nav ms-auto">
+
+          <li class="nav-item">
+            {% if not user.is_authenticated %}
+              <a class="btn btn-alert navbar-btn" type="button" href="{% url 'register' %}">Register</a>
+            {% else %}
+              <a class="btn btn-alert navbar-btn" type="button" href="{% url 'dashboard' %}">Dashboard</a>
+            {% endif %}
+
+          </li>
 
 
-      </ul>
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+              <a class="btn btn-alert navbar-btn" type="button" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+              <a class="btn btn-alert navbar-btn" type="button" href="{% url 'two_factor:login' %}">Login</a>
+            {% endif %}
+          </li>
 
+
+        </ul>
+
+      </div>
     </div>
-  </div>
   </nav>
 
   <!-- -------- Auto logout and redirect to login page ---------- -->
@@ -82,11 +83,21 @@
 
   <!-- ----------------------- Main block ----------------------- -->
 
-  {% block content_wrapper %}
+  <main>
+    {% block content_wrapper %}
+      <div class="container">
+        {% block content %}{% endblock %}
+      </div>
+    {% endblock %}
+  </main>
+
+</div>
+
+<footer class="navbar navbar-expand-lg bg-light">
     <div class="container">
-      {% block content %}{% endblock %}
+      <p>Developed by</p>
     </div>
-  {% endblock %}
+  </footer>
 
   <!-- -------------------------- Scripts ----------------------- -->
 
