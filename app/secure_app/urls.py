@@ -36,7 +36,7 @@ urlpatterns = [
         auth_views.PasswordResetDoneView.as_view(
             template_name='secure_app/password/password_reset_sent.html'
         ),
-        name='reset_password_sent'
+        name='password_reset_done'
     ),
 
     # Send a link to reset password. Presents a form for entering a new password
@@ -45,7 +45,7 @@ urlpatterns = [
         auth_views.PasswordResetConfirmView.as_view(
             template_name='secure_app/password/password_reset_form.html'
         ),
-        name='reset_password_confirm'
+        name='password_reset_confirm'
     ),
 
     # Success page password has been changed successfully
@@ -54,6 +54,6 @@ urlpatterns = [
         auth_views.PasswordResetCompleteView.as_view(
             template_name='secure_app/password/password_reset_complete.html'
         ),
-        name='reset_password_complete'
+        name='password_reset_complete'
     ),
 ]
