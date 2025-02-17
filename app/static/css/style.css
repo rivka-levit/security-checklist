@@ -33,3 +33,8 @@ footer p {
     margin-top: 20px;
     text-transform: initial;
 }
+
+.container-fluid {
+    padding: 0 !important;
+    margin: 0 !important;
+}
