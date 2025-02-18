@@ -6,8 +6,13 @@
 
       <div class="alert alert-{% if message.tags %}{{ message.tags }}{% else %}primary{% endif %} alert-dismissible fade show text-center px-0"
            role="alert">
+
         <button type="button" class="close btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
-        {{ message }}
+
+        <i class="{% if request.session.fa_class %}{{ request.session.fa_class }}
+                  {% else %}fa-solid fa-hand-peace{% endif %}"
+           aria-hidden="true"></i> &nbsp; {{ message }}
+
       </div>
 
     {% endfor %}

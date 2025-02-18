@@ -42,6 +42,8 @@ class RegisterView(View):
             return redirect('two_factor:login')
 
         messages.error(request, 'Invalid data provided.')
+        request.session['fa_class'] = 'fa-solid fa-triangle-exclamation'
+
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
