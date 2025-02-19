@@ -21,7 +21,12 @@
 
         <input type="submit"
                value="Create account"
-               class="btn btn-info w-100 p-3 mt-4 mt-xl-5">
+               class="btn btn-info w-100 p-3 mt-3 mt-xl-4">
+
+        <a href="{% url 'two_factor:login' %}" class="mt-2 d-block">
+          Already have an account?
+        </a>
+
       </form>
 
     </div>
